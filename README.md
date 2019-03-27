@@ -5,14 +5,13 @@ Conway's Game of Life rendered using p5.js library
 
 ```
 $ git clone https://github.com/TuKDoan/game-of-life.git
-
 ```
 
 Run `index.html` in browser
 
 ### Size
 
-To change size change the variables `reso` , `canvx`, and `canvy` in `sketch.js`
+To change the size of the canvas, change the variables `reso` , `canvx`, and `canvy` in `sketch.js`
 
 ### Rules
 
