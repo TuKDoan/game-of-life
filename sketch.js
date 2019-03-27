@@ -47,11 +47,6 @@ function draw() {
     for (let j = 0; j < rows; j++) {
       let state = grid[i][j];
 
-      // Edges
-      if (i == 0 || i == cols - 1 || j == 0 || j == rows - 1){
-        next[i][j] = state;
-      } else {
-
       // Count the number of live neighbors
       let sum = 0;
       let neighbors = countNeighbors(grid, i, j)
@@ -66,7 +61,6 @@ function draw() {
       }
     }
   }
-}
 
   grid = next;
 
@@ -76,7 +70,11 @@ function countNeighbors(grid, x, y){
   let sum = 0;
   for (let i = -1; i < 2; i ++){
     for (let j = -1; j < 2; j++){
-      sum += grid[x + i][y + j];
+
+      let col = (x + i + cols) % cols;
+      let row = (y + j + rows) % rows;
+
+      sum += grid[col][row];
     }
   }
 
