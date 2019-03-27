@@ -28,6 +28,7 @@ function setup() {
 
 function draw() {
   background(0);
+
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       let x = i * reso;
@@ -38,4 +39,48 @@ function draw() {
       }
     }
   }
+
+  let next = make2DArray(cols, rows);
+
+  // Compute next generation based on grid
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      let state = grid[i][j];
+
+      // Edges
+      if (i == 0 || i == cols - 1 || j == 0 || j == rows - 1){
+        next[i][j] = state;
+      } else {
+
+      // Count the number of live neighbors
+      let sum = 0;
+      let neighbors = countNeighbors(grid, i, j)
+
+      // Rules for game.
+      if (state == 0 && neighbors == 3) {
+        next[i][j] = 1;
+      } else if (state == 1 && (neighbors < 2 || neighbors > 3)){
+        next[i][j] = 0;
+      } else {
+        next[i][j] = state;
+      }
+    }
+  }
+}
+
+  grid = next;
+
+}
+
+function countNeighbors(grid, x, y){
+  let sum = 0;
+  for (let i = -1; i < 2; i ++){
+    for (let j = -1; j < 2; j++){
+      sum += grid[x + i][y + j];
+    }
+  }
+
+  sum -= grid[x][y];
+  return sum;
+
 }
